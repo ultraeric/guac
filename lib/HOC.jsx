@@ -1,5 +1,8 @@
 import {Component} from 'react';
 
+let bindMethodNames = ['onMouseDown', 'onMouseUp', 'onMouseEnter', 'onMouseLeave',
+                       'onMouseClick', 'className'];
+
 //Wrap your higher-ordered components with this
 function HOC(WrappedComponent) {
   for (var methodName in bindMethodNames) {

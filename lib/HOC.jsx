@@ -1,4 +1,5 @@
 import {Component} from 'react';
+import * as utils from './utils';
 
 let bindMethodNames = ['onMouseDown', 'onMouseUp', 'onMouseEnter', 'onMouseLeave',
                        'onMouseClick', 'className'];
@@ -11,13 +12,20 @@ function HOC(WrappedComponent) {
     function composeFunction(methodName) {
       let ownMethod = WrappedComponent[methodName];
       return function(args) {
-        ownMethod();
-        this.props[methodName] ? this.props[methodName](...args) : null;
+        ownMethod && ownMethod();
+        this.props[methodName] && this.props[methodName](...args);
       };
     }
 
     WrappedComponent[methodName] = composeFunction(methodName);
   }
+
+  //Allows usage of this.bindAllMethods() in the constructor
+  WrappedComponent.bindAllMethods = () => utils.bindAllMethods(this);
+  //Allows usage of this.deleteUsedProps(propNames)
+  WrappedComponent.deleteUsedProps =
+    (propNames) => return utils.deleteUsedProps(this, propNames);
+    
   return WrappedComponent;
 }
 

@@ -10,15 +10,15 @@ function HOC(WrappedComponent) {
 
     //Closure to keep ownMethod reference
     function composeFunction(methodName) {
-      let ownMethod = WrappedComponent[methodName];
-      return function(args) {
-        ownMethod && ownMethod();
-        this.props[methodName] && this.props[methodName](...args);
+      let ownMethod = WrappedComponent.prototype[methodName];
+      return function() {
+        ownMethod && ownMethod.call(this, ...arguments);
+        this.props[methodName] && this.props[methodName](...arguments);
       };
     }
 
     let methodName = bindMethodNames[methodNameID];
-    WrappedComponent[methodName] = composeFunction(methodName);
+    WrappedComponent.prototype[methodName] = composeFunction(methodName);
   }
 
   //Allows usage of this.bindAllMethods() in the constructor
@@ -27,7 +27,7 @@ function HOC(WrappedComponent) {
   };
   //Allows usage of this.deleteUsedProps(propNames)
   WrappedComponent.prototype.deleteUsedProps = function(propNames) {
-    utils.deleteUsedProps(this, propNames);
+    return utils.deleteUsedProps(this.props, propNames);
   }
 
   return WrappedComponent;

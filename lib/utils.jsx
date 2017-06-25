@@ -14,7 +14,7 @@ function bindAllMethods(obj) {
 
 //Non-mutating
 function deleteUsedProps(props, propNames) {
-  let updatedProps = props.slice();
+  let updatedProps = Object.assign({}, props);
   for (var propNameID in propNames) {
     let propName = propNames[propNameID];
     if (updatedProps[propName]) {

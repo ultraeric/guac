@@ -1,3 +1,5 @@
+import * as React from 'react';
+
 //Quickly bind all methods
 function bindAllMethods(obj) {
   let protoObj = Object.getPrototypeOf(obj);
@@ -12,14 +14,17 @@ function bindAllMethods(obj) {
 
 //Non-mutating
 function deleteUsedProps(props, propNames) {
-  let updatedProps = {...props};
-  for (var propName in propNames) {
-    updatedProps[propName] && delete updatedProps[propName];
+  let updatedProps = props.slice();
+  for (var propNameID in propNames) {
+    let propName = propNames[propNameID];
+    if (updatedProps[propName]) {
+          delete updatedProps[propName];
+    }
   }
   return updatedProps;
 }
 
-let exports = {bindAllMethods, deleteUsedProps}
+let exports = {bindAllMethods, deleteUsedProps};
 
 export default exports;
-export {bindAllMethods, deleteUserProps};
+export {bindAllMethods, deleteUsedProps};

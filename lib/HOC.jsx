@@ -6,7 +6,7 @@ let bindMethodNames = ['onMouseDown', 'onMouseUp', 'onMouseEnter', 'onMouseLeave
 
 //Wrap your higher-ordered components with this
 function HOC(WrappedComponent) {
-  for (var methodName in bindMethodNames) {
+  for (var methodNameID in bindMethodNames) {
 
     //Closure to keep ownMethod reference
     function composeFunction(methodName) {
@@ -17,15 +17,19 @@ function HOC(WrappedComponent) {
       };
     }
 
+    let methodName = bindMethodNames[methodNameID];
     WrappedComponent[methodName] = composeFunction(methodName);
   }
 
   //Allows usage of this.bindAllMethods() in the constructor
-  WrappedComponent.bindAllMethods = () => utils.bindAllMethods(this);
+  WrappedComponent.prototype.bindAllMethods = function() {
+    utils.bindAllMethods(this);
+  };
   //Allows usage of this.deleteUsedProps(propNames)
-  WrappedComponent.deleteUsedProps =
-    (propNames) => return utils.deleteUsedProps(this, propNames);
-    
+  WrappedComponent.prototype.deleteUsedProps = function(propNames) {
+    utils.deleteUsedProps(this, propNames);
+  }
+
   return WrappedComponent;
 }
 

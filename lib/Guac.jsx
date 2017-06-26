@@ -1,6 +1,6 @@
 import * as utils from './utils';
 let bindMethodNames = ['onMouseDown', 'onMouseUp', 'onMouseEnter', 'onMouseLeave',
-                       'onClick', 'className'];
+                       'onClick'];
 
 /*
 NOTE: ONLY USE THIS IS YOU PLAN ON UTILIZING COMPOSITION TO COMBINE METHODS.
@@ -46,6 +46,14 @@ function Guac(WrappedComponent) {
     let methodName = bindMethodNames[methodNameID];
     WrappedComponent.prototype[methodName] = composeFunction(methodName);
   }
+
+  WrappedComponent.prototype.className = (function() {
+    let ownMethod = WrappedComponent.prototype.className;
+    return function() {
+      return ((ownMethod && (ownMethod.call(this, ...arguments) + ' ') || '') +
+      (this.props.className || '');
+    }
+  })();
 
   //Allows usage of this.bindAllMethods() in the constructor
   WrappedComponent.prototype.bindAllMethods = function() {

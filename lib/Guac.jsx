@@ -51,7 +51,7 @@ function Guac(WrappedComponent) {
     let ownMethod = WrappedComponent.prototype.className;
     return function() {
       return ((ownMethod && (ownMethod.call(this, ...arguments) + ' ') || '') +
-      (this.props.className || '');
+      (this.props.className || ''));
     }
   })();
 

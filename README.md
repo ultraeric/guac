@@ -68,4 +68,9 @@ down instead.
 
 Method|Parameters|Returns|Description
 ---|---|---|---
-`this.className()`|None|string|Define the calculation for your higher-order component's className here and return it. 
+`this.className()`|None|string|Define the calculation for your higher-order component's `className` here and return it. Call this in `render()` to get the composed `className` and pass that value down.
+`this.onClick(event)`|event|None|Define onClick prop. Pass prop as a method reference as usual.
+`this.onMouseDown(event)`|event|None|Define onMouseDown prop. Pass prop as a method reference as usual.
+`this.onMouseUp(event)`|event|None|Define onMouseUp prop. Pass prop as a method reference as usual.
+`this.onMouseEnter(event)`|event|None|Define onMouseEnter prop. Pass prop as a method reference as usual.
+`this.onMouseLeave(event)`|event|None|Define onMouseLeave prop. Pass prop as a method reference as usual.

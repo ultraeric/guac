@@ -17,7 +17,7 @@ function deleteUsedProps(props, propNames) {
   let updatedProps = Object.assign({}, props);
   for (var propNameID in propNames) {
     let propName = propNames[propNameID];
-    if (updatedProps[propName]) {
+    if (typeof(updatedProps[propName]) !== 'undefined') {
           delete updatedProps[propName];
     }
   }

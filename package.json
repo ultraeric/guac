@@ -1,6 +1,6 @@
 {
   "name": "guac-hoc",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "General Usage Advanced Components (guac) - A higher order component (HOC) and utility library.",
   "main": "index.js",
   "scripts": {

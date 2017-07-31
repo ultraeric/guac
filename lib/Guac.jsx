@@ -70,7 +70,7 @@ function Guac(WrappedComponent) {
     return function() {
       let ownStyle = ownMethod ? ownMethod.call(this, ...arguments) : {};
       let propsStyle = this.props.style || {};
-      return Object.assign({}, propsStyle, ownStyle);
+      return Object.assign({}, ownStyle, propsStyle);
     }
   })();
 

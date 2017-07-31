@@ -16,10 +16,7 @@ function bindAllMethods(obj) {
 function deleteUsedProps(props, propNames) {
   let updatedProps = Object.assign({}, props);
   for (var propNameID in propNames) {
-    let propName = propNames[propNameID];
-    if (typeof(updatedProps[propName]) !== 'undefined') {
-          delete updatedProps[propName];
-    }
+    delete updatedProps[propNames[propNameID]];
   }
   return updatedProps;
 }

@@ -1,10 +1,6 @@
 {
   "name": "guac-hoc",
-<<<<<<< HEAD
-  "version": "0.0.12",
-=======
   "version": "0.0.23",
->>>>>>> 5eb1527353068d24ee74df3a43aa2694500f7243
   "description": "General Usage Advanced Components (guac) - A higher order component (HOC) and utility library.",
   "main": "index.js",
   "scripts": {
@@ -15,11 +11,11 @@
   "author": "Eric (Yiqi)",
   "license": "ISC",
   "dependencies": {
-    "babel-preset-env": "^1.6.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1"
   },
   "devDependencies": {
+    "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1"
   }
 }

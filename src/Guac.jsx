@@ -48,7 +48,10 @@ function Guac(WrappedComponent) {
       let ownMethod = WrappedComponent.prototype[methodName];
       return function() {
         ownMethod && ownMethod.call(this, ...arguments);
-        this.props[methodName] && this.props[methodName](...arguments);
+        if ((event && !event.isPropagationStopped()) || !event) {
+          this.props[methodName] && this.props[methodName](...arguments);
+        }
+
       };
     }
 

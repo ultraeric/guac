@@ -7,6 +7,15 @@ NOTE: ONLY USE THIS IS YOU PLAN ON UTILIZING COMPOSITION TO COMBINE METHODS.
 THIS IS OFTEN DONE TO APPLY STYLES IN OPTIONAL LAYERS OR ADD CUSTOMIZABLE LAYERS
 OF FUNCTIONALITY TO COMPONENTS.
 
+USAGE:
+- All Guac components, when providing custom functionality for any of the above
+    method names, should implement the methods and provide any extra functionality
+    they are providing in those methods. The composition will automatically be
+    handled.
+
+- A Guac component's render() method should pass all props it is provided first,
+    then override any methods as needed.
+
 Guac provides a number of utility functions. Call it on a component to transform it.
 
 - All method names in bindMethodNames are names of special functions. They are
@@ -50,8 +59,18 @@ function Guac(WrappedComponent) {
   WrappedComponent.prototype.className = (function() {
     let ownMethod = WrappedComponent.prototype.className;
     return function() {
-      return ((ownMethod && (ownMethod.call(this, ...arguments) + ' ') || '') +
-      (this.props.className || ''));
+      let ownClassName = ownMethod ? ownMethod.call(this, ...arguments) : '';
+      let propsClassName = this.props.className || '';
+      return ownClassName + ' ' + propsClassName;
+    }
+  })();
+
+  WrappedComponent.prototype.style = (function() {
+    let ownMethod = WrappedComponent.prototype.style;
+    return function() {
+      let ownStyle = ownMethod ? ownMethod.call(this, ...arguments) : {};
+      let propsStyle = this.props.style || {};
+      return Object.assign({}, ownStyle, propsStyle);
     }
   })();
 
@@ -63,6 +82,8 @@ function Guac(WrappedComponent) {
   WrappedComponent.prototype.deleteUsedProps = function(propNames) {
     return utils.deleteUsedProps(this.props, propNames);
   }
+
+  WrappedComponent.isGuacComponent = true;
 
   return WrappedComponent;
 }

@@ -37,7 +37,31 @@ boilerplate.
     }
   }
 ```
-    
+
+So instead, we let this library handle it. 
+
+```jsx
+  function higherOrderComponent(WrappedComponent) {
+  ...  
+    class WrapperComponent extends React.Component {
+      constructor() {
+        super();
+        //Instead of following ES6 experimental structure, use this to have more java-like declarative syntax.
+        this.bindAllMethods();
+      }
+      ...
+      render() {
+        return (
+                                                     /* \/ Call this to retrieve the composed classNames.*/
+          <WrappedComponent {...this.props} className={this.className()}/>
+        );
+      }
+      //This line provides higher-order-component functionality to your components.
+      return HOC(WrapperComponent);
+    }
+  }
+```
+
 <h1>Installation</h1>
 <p>Run the following to install:</p>
 

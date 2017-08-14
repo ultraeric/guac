@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "babel src -d lib --copy-files",
-    "build": "npm run prepare && webpack"
+    "build": "npm run prepare && webpack",
+    "watch": "babel -w src -d lib"
   },
   "author": "Eric (Yiqi)",
   "license": "ISC",

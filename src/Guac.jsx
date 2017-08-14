@@ -49,9 +49,7 @@ function Guac(WrappedComponent) {
       return function() {
         ownMethod && ownMethod.call(this, ...arguments);
         let proxyEvent = arguments[0];
-        console.log('testin');
         if (proxyEvent && (!proxyEvent.isPropagationStopped || !proxyEvent.isPropagationStopped())) {
-          console.log('propsmethod called');
           this.props[methodName] && this.props[methodName](...arguments);
         }
 
